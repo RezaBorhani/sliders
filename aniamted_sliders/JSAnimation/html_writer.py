@@ -168,24 +168,28 @@ JS_INCLUDE = """
   }
   
  
-  function pictureChange(a,b){
-  
-  
-      if (a=='reverse') {
-          document.getElementById("reverse-button"+b).src = "http://localhost:8888/tree/JSAnimation/icons/reverse-filled.png";
-          document.getElementById("pause-button"+b).src =  "http://localhost:8888/tree/JSAnimation/icons/pause.png";
-          document.getElementById("play-button"+b).src =  "http://localhost:8888/tree/JSAnimation/icons/play.png";}
+  function IconPictureChange(mode,id){
+
+      switch(mode){
+          case 'reverse':
+              document.getElementById("reverse-button"+id).src = "./JSAnimation/icons/reverse-filled.png";
+              document.getElementById("pause-button"+id).src =  "./JSAnimation/icons/pause.png";
+              document.getElementById("play-button"+id).src =  "./JSAnimation/icons/play.png";
+              break;
             
-      if (a=='pause') {    
-          document.getElementById("reverse-button"+b).src =  "http://localhost:8888/tree/JSAnimation/icons/reverse.png";
-          document.getElementById("pause-button"+b).src =  "http://localhost:8888/tree/JSAnimation/icons/pause-filled.png";
-          document.getElementById("play-button"+b).src =  "http://localhost:8888/tree/JSAnimation/icons/play.png";}
+          case 'pause':   
+              document.getElementById("reverse-button"+id).src =  "./JSAnimation/icons/reverse.png";
+              document.getElementById("pause-button"+id).src =  "./JSAnimation/icons/pause-filled.png";
+              document.getElementById("play-button"+id).src =  "./JSAnimation/icons/play.png";
+              break;
             
-       if (a=='play') {    
-           document.getElementById("reverse-button"+b).src =  "http://localhost:8888/tree/JSAnimation/icons/reverse.png";
-           document.getElementById("pause-button"+b).src =  "http://localhost:8888/tree/JSAnimation/icons/pause.png";
-           document.getElementById("play-button"+b).src =  "http://localhost:8888/tree/JSAnimation/icons/play-filled.png";}
-  }
+           case 'play': 
+               document.getElementById("reverse-button"+id).src =  "./JSAnimation/icons/reverse.png";
+               document.getElementById("pause-button"+id).src =  "./JSAnimation/icons/pause.png";
+               document.getElementById("play-button"+id).src =  "./JSAnimation/icons/play-filled.png";
+               break;
+           }
+      }
   
 </script>
 """
@@ -211,7 +215,7 @@ JS_INCLUDE = """
 
 DISPLAY_TEMPLATE = """ 
 
-<link rel="stylesheet" type="text/css" href="http://localhost:8888/tree/JSAnimation/icons/mystyle.css">
+<link rel="stylesheet" type="text/css" href="./JSAnimation/icons/mystyle.css">
 
 <div class="animation" align="center">
     
@@ -219,28 +223,24 @@ DISPLAY_TEMPLATE = """
     
     <div id='space'></div>
     
-
-    
-    
-    <button onclick="anim{id}.reverse_animation(); pictureChange('reverse','{id}');"> 
-        <img class="anim_icon" id="reverse-button{id}" src="{icons.reverse}"   style="width:48px;height:48px;">
-    </button>
-    
-      &nbsp;
-    
-    <button onclick="anim{id}.pause_animation(); pictureChange('pause','{id}');">
-        <img class="anim_icon" id="pause-button{id}" src="{icons.pause}" style="width:48px;height:48px;">
+    <button onclick="anim{id}.reverse_animation(); IconPictureChange('reverse','{id}');"> 
+        <img class="button-image" id="reverse-button{id}" src="{icons.reverse}">
     </button>
     
     &nbsp;
     
-    <button onclick="anim{id}.play_animation();pictureChange('play','{id}');">
-        <img class="anim_icon" id="play-button{id}" src="{icons.play}" style="width:48px;height:48px;">
+    <button onclick="anim{id}.pause_animation(); IconPictureChange('pause','{id}');">
+        <img class="button-image" id="pause-button{id}" src="{icons.pause}">
+    </button>
+    
+    &nbsp;
+    
+    <button onclick="anim{id}.play_animation(); IconPictureChange('play','{id}');">
+        <img class="button-image" id="play-button{id}" src="{icons.play}">
     </button>
    
-   <input id="_anim_slider{id}" type="range" style="visibility: hidden;pointer-events: none;" name="points" min="0" max="1" step="1" value="0"></input>
+    <input id="_anim_slider{id}" type="range" style="visibility: hidden;pointer-events: none;" name="points" min="0" max="1" step="1" value="0"></input>
 
-    
 </div>
 
 
